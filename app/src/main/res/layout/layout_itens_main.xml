@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.graphics.Color"/>
+        <variable
+            name="tvShow"
+            type="com.automatodev.antenado.models.TvMostPopular" />
+
+        <variable
+
+            name="color"
+            type="android.graphics.Color" />
+
+
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardItens_layout"
+        android:layout_width="match_parent"
+        app:cardElevation="@dimen/_8sdp"
+        app:cardCornerRadius="@dimen/_4sdp"
+        android:layout_margin="@dimen/_5sdp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:animateLayoutChanges="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/relativeContent_layout"
+                android:background="@color/primaryVariant"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp">
+
+                <View
+                    android:id="@+id/viewSupport_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp" />
+
+                <View
+                    android:id="@+id/viewBack_layout"
+                    android:background="@drawable/bg_item_card_view"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/viewSupport_layout"
+                    android:layout_height="match_parent" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imgItem_layout"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:url="@{tvShow.urlImage}"
+                    android:scaleType="centerCrop"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    app:riv_corner_radius="@dimen/_4sdp" />
+
+                <TextView
+                    android:id="@+id/txtName_layout"
+                    android:text="@{tvShow.name}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/imgItem_layout"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_toRightOf="@id/imgItem_layout"
+                    android:layout_below="@id/viewSupport_layout"
+                    android:textColor="@color/colorTextPrimary"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:includeFontPadding="false"
+                    android:textSize="@dimen/_13sdp"
+                    android:paddingTop="@dimen/_8sdp" />
+
+
+                <TextView
+                    android:id="@+id/txtNetWork_layout"
+                    android:text='@{tvShow.country+" ("+tvShow.network+")"}'
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/imgItem_layout"
+                    android:layout_toRightOf="@id/imgItem_layout"
+                    android:layout_below="@id/txtName_layout"
+                    android:textColor="@color/colorTextOther"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:includeFontPadding="false"
+                    android:paddingTop="@dimen/_2sdp" />
+
+                <TextView
+                    android:id="@+id/txtStarted_layout"
+                    android:text='@{"Foi ao ar em: "+tvShow.startDate}'
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/imgItem_layout"
+                    android:layout_toRightOf="@id/imgItem_layout"
+                    android:layout_below="@id/txtNetWork_layout"
+                    android:textColor="@color/colorTextSecondary"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:includeFontPadding="false"
+                    android:textSize="@dimen/_12sdp"
+                    android:paddingTop="@dimen/_2sdp" />
+
+                <TextView
+                    android:id="@+id/txtStatus_layout"
+                    android:text='@{tvShow.status.equals("Ended") ? "Encerrado" : "Exibindo"}'
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/imgItem_layout"
+                    android:layout_toRightOf="@id/imgItem_layout"
+                    android:layout_below="@id/txtStarted_layout"
+                    android:textColor='@{tvShow.status.equals("Ended") ? Color.parseColor("#ff5252") : Color.parseColor("#4CAF50")}'
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:includeFontPadding="false"
+                    android:textSize="@dimen/_12sdp"
+                    android:paddingTop="@dimen/_2sdp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

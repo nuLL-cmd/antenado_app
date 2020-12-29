@@ -16,6 +16,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures{
+        dataBinding true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -35,4 +38,37 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //SwipeRefreshLayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    //Room database and RxJava Support
+    def room_version = "2.2.5"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+
+    //RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.0.1'
+
+    //Scalable size units
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+    //Rounde image view
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    //LifeCicle
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //Lombok
+    implementation 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+    //Picasso library
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }
