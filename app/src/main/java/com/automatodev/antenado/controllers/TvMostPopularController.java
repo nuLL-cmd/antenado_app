@@ -1,5 +1,6 @@
 package com.automatodev.antenado.controllers;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.lifecycle.LiveData;
@@ -12,11 +13,14 @@ public class TvMostPopularController extends ViewModel {
 
     private TvMostPopularService tmpService;
 
-    public TvMostPopularController(View view){
-        tmpService  = new TvMostPopularService(view);
+
+    public TvMostPopularController(){
+        tmpService  = new TvMostPopularService();
     }
 
     public LiveData<TvDataSheet> getAllTvMostPopular(int page){
         return tmpService.getAllTvMostPopular(page);
     }
+
+
 }

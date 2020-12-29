@@ -20,7 +20,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardItens_layout"
         android:layout_width="match_parent"
-        app:cardElevation="@dimen/_8sdp"
+        app:cardElevation="@dimen/_1sdp"
         app:cardCornerRadius="@dimen/_4sdp"
         android:layout_margin="@dimen/_5sdp"
         android:layout_height="wrap_content">
@@ -32,7 +32,7 @@
             android:layout_height="match_parent">
             <RelativeLayout
                 android:id="@+id/relativeContent_layout"
-                android:background="@color/primaryVariant"
+                android:background="@color/onPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_120sdp">
 

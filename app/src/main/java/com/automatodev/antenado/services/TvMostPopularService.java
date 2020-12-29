@@ -24,15 +24,15 @@ import retrofit2.Response;
 public class TvMostPopularService {
 
     private ApiService apiService;
-    private View view;
-    public TvMostPopularService(View view){
-        this.view = view;
+   // private View view;
+    public TvMostPopularService(){
+        //this.view = view;
         apiService = ApiClient.getRetrofit().create(ApiService.class);
     }
 
     public LiveData<TvDataSheet> getAllTvMostPopular(int page){
         MutableLiveData<TvDataSheet> data = new MutableLiveData<>();
-        apiService.getAllMosetPopular(page).enqueue(new Callback<TvDataSheet>() {
+        apiService.getMostPopular(page).enqueue(new Callback<TvDataSheet>() {
             @Override
             public void onResponse(Call<TvDataSheet> call, Response<TvDataSheet> response) {
                 if(response.isSuccessful())
@@ -40,7 +40,7 @@ public class TvMostPopularService {
                 else{
                     try {
                         JSONObject error = new JSONObject(response.errorBody().string());
-                        Snackbar.make(view, "Erro ao recuperar os dados solicitados! \nTente novamente mais tarde", Snackbar.LENGTH_LONG).show();
+                       // Snackbar.make(view, "Erro ao recuperar os dados solicitados! \nTente novamente mais tarde", Snackbar.LENGTH_LONG).show();
                     } catch (JSONException | IOException e) {
                         e.printStackTrace();
                         Log.e("logx","Error getAllTvMostPopular: "+e.getMessage());

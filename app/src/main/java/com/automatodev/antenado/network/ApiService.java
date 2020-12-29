@@ -9,5 +9,6 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     @GET("most-popular")
-    Call<TvDataSheet> getAllMosetPopular(@Query("page") int page);
+    Call<TvDataSheet> getMostPopular(@Query("page") int page);
+
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Antenado</string>
+    <string name="app_name" size="24dp">Antenado</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
