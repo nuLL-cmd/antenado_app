@@ -71,4 +71,7 @@ dependencies {
     //Picasso library
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    //Progressbar
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
 }

@@ -5,6 +5,15 @@
 
     <data>
 
+        <import type="android.view.View"/>
+        <variable
+            name="isLoadingMore"
+            type="Boolean" />
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
     </data>
 
     <RelativeLayout
@@ -15,19 +24,37 @@
         tools:context=".activities.ScrollingActivity"
         tools:showIn="@layout/activity_scrolling">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefresh_main"
+        <androidx.recyclerview.widget.RecyclerView
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:id="@+id/recyclerItem_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:orientation="vertical"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/_45sdp"
+            android:layout_height="match_parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:id="@+id/recyclerItem_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressInit_main"
+            style="@style/SpinKitView.Small.ThreeBounce"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:visibility="@{isLoading ? View.VISIBLE : View.GONE, default=gone}"
+            app:SpinKit_Color="#fff" />
 
-
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressMore_main"
+            style="@style/SpinKitView.Small.ThreeBounce"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:visibility='@{isLoadingMore ? View.VISIBLE : View.GONE, default=gone}'
+            android:layout_alignParentBottom="true"
+            app:SpinKit_Color="#fff" />
 
     </RelativeLayout>
 </layout>

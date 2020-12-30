@@ -1,5 +1,8 @@
 package com.automatodev.antenado.activities;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import com.automatodev.antenado.R;
@@ -11,14 +14,17 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -30,7 +36,10 @@ public class ScrollingActivity extends AppCompatActivity {
     private TvMostPopularAdapter adapter;
     private TvMostPopularController tvControler;
     private ActivityScrollingBinding binding;
+    private int currentPage = 1;
+    private int totalAvaliablePages = 1;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +49,10 @@ public class ScrollingActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         CollapsingToolbarLayout toolBarLayout =  findViewById(R.id.toolbar_layout);
 
+       // binding.includeContentScolling.progressMoreMain.getIndeterminateDrawable().setColorFilter(android.R.color.transparent, PorterDuff.Mode.SRC);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,27 +87,55 @@ public class ScrollingActivity extends AppCompatActivity {
 
 
     public void showData() {
-        binding.includeContentScolling.swipeRefreshMain.setColorSchemeResources(R.color.primary);
-        binding.includeContentScolling.swipeRefreshMain.setRefreshing(true);
         binding.includeContentScolling.recyclerItemMain.hasFixedSize();
         tvControler = new ViewModelProvider(this).get(TvMostPopularController.class);
         adapter = new TvMostPopularAdapter(tvMostPopulars);
         binding.includeContentScolling.recyclerItemMain.setAdapter(adapter);
+        binding.includeContentScolling.recyclerItemMain.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!binding.includeContentScolling.recyclerItemMain.canScrollVertically(1)){
+                    if (currentPage <= totalAvaliablePages){
+                        currentPage += 1;
+                        getAllTvMostPopular();
+                    }
+                }
+            }
+        });
+
 
         getAllTvMostPopular();
     }
 
     private void getAllTvMostPopular() {
-        tvControler.getAllTvMostPopular(1).observe(this, tvDataSheet -> {
+        toggleLoading();
+        tvControler.getAllTvMostPopular(currentPage).observe(this, tvDataSheet -> {
+            toggleLoading();
             if (tvDataSheet != null) {
+                totalAvaliablePages = tvDataSheet.getTotalPages();
                 if (tvDataSheet.getTvMostPopulars() != null) {
                     tvMostPopulars.addAll(tvDataSheet.getTvMostPopulars());
-                    adapter.notifyDataSetChanged();
-                    binding.includeContentScolling.swipeRefreshMain.setRefreshing(false);
-                    Snackbar.make(binding.getRoot(), "Itens disponiveis: "+tvMostPopulars.size(), Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    int oldCount = tvMostPopulars.size();
+                    tvMostPopulars.addAll(tvDataSheet.getTvMostPopulars());
+                    adapter.notifyItemRangeChanged(oldCount, tvMostPopulars.size());
                 }
             }
         });
+    }
+
+    private void toggleLoading(){
+        if (currentPage == 1){
+            if (binding.includeContentScolling.getIsLoading() != null && binding.includeContentScolling.getIsLoading())
+                binding.includeContentScolling.setIsLoading(false);
+            else
+                binding.includeContentScolling.setIsLoading(true);
+        }else{
+            if (binding.includeContentScolling.getIsLoadingMore() != null && binding.includeContentScolling.getIsLoadingMore())
+                binding.includeContentScolling.setIsLoadingMore(false);
+            else
+                binding.includeContentScolling.setIsLoadingMore(true);
+
+        }
     }
 }
