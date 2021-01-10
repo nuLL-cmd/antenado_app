@@ -16,7 +16,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_details"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_350sdp"
+            android:layout_height="@dimen/_300sdp"
             android:fitsSystemWindows="true"
             android:theme="@style/Theme.Antenado.AppBarOverlay">
 
@@ -93,4 +93,6 @@
             app:srcCompat="@android:drawable/star_on" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
 </layout>

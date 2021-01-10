@@ -1,7 +1,9 @@
 package com.automatodev.antenado.services;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,6 +12,7 @@ import com.automatodev.antenado.models.TvMostPopular;
 import com.automatodev.antenado.network.ApiClient;
 import com.automatodev.antenado.network.ApiService;
 import com.automatodev.antenado.responses.TvDataSheet;
+import com.automatodev.antenado.responses.TvDetailsDataShet;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
@@ -24,10 +27,40 @@ import retrofit2.Response;
 public class TvMostPopularService {
 
     private ApiService apiService;
+    private Context context;
    // private View view;
-    public TvMostPopularService(){
+    public TvMostPopularService(Context context){
         //this.view = view;
         apiService = ApiClient.getRetrofit().create(ApiService.class);
+        this.context = context;
+    }
+
+    public LiveData<TvDetailsDataShet> getDetailsTvShow(int id){
+        MutableLiveData<TvDetailsDataShet> liveData = new MutableLiveData<>();
+        apiService.getDetailsTvShow(id).enqueue(new Callback<TvDetailsDataShet>() {
+            @Override
+            public void onResponse(Call<TvDetailsDataShet> call, Response<TvDetailsDataShet> response) {
+                if (response.isSuccessful()){
+                    liveData.setValue(response.body());
+                }else {
+                    try {
+                        JSONObject error = new JSONObject(response.errorBody().string());
+                    }catch (IOException | JSONException e) {
+                        Log.e("logx",  "TryError getDetailsTvData");
+                        Toast.makeText(context, "Erro ao trazer os dados: "+response.code(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<TvDetailsDataShet> call, Throwable t) {
+                Toast.makeText(context, "Erro ao trazer os dados: "+t.getCause(), Toast.LENGTH_SHORT).show();
+                Log.e("logx","ErrorgetDetailsTvData: "+t.getMessage());
+            }
+        });
+
+        return liveData;
     }
 
     public LiveData<TvDataSheet> getAllTvMostPopular(int page){

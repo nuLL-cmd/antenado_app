@@ -118,13 +118,13 @@
                 <TextView
                     android:id="@+id/txtStatus_layout"
                     android:text='@{tvShow.status.equals("Ended") ? "Encerrado" : "Exibindo"}'
+                    android:textColor='@{tvShow.status.equals("Ended") ? Color.parseColor("#ff5252") : Color.parseColor("#4CAF50")}'
                     android:layout_marginTop="@dimen/_3sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/imgItem_layout"
                     android:layout_toRightOf="@id/imgItem_layout"
                     android:layout_below="@id/txtStarted_layout"
-                    android:textColor='@{tvShow.status.equals("Ended") ? Color.parseColor("#ff5252") : Color.parseColor("#4CAF50")}'
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
