@@ -3,18 +3,25 @@ package com.automatodev.antenado.activities;
 import android.os.Bundle;
 
 import com.automatodev.antenado.databinding.ActivityDetailsBinding;
+import com.automatodev.antenado.viewModel.TvDetailsController;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.telecom.Call;
 import android.view.View;
+import android.widget.Toast;
 
 import com.automatodev.antenado.R;
 
 public class DetailsActivity extends AppCompatActivity {
+
+    private TvDetailsController tvDetailsController;
 
     private ActivityDetailsBinding binding;
     @Override
@@ -23,18 +30,39 @@ public class DetailsActivity extends AppCompatActivity {
         binding  = ActivityDetailsBinding.inflate(getLayoutInflater());
         View v = binding.getRoot();
         setContentView(v);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        toolBarLayout.setTitle(getTitle());
+        setSupportActionBar(binding.toolbarDetails);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        binding.toolbarDetails.setNavigationOnClickListener(v1 -> NavUtils.navigateUpFromSameTask(DetailsActivity.this));
+        binding.fabListEpisodesDetails.setOnClickListener(view -> Snackbar.make(view, "Id do item: ", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
+
+        getData();
+
+    }
+
+    public void fetchDetails(String id){
+        binding.setIsLoading(true);
+        tvDetailsController = new ViewModelProvider(this).get(TvDetailsController.class);
+        tvDetailsController.getDetailsTvShow(id).observe(this, tvDetailsDataSheet -> {
+            if (tvDetailsDataSheet != null){
+                binding.setIsLoading(false);
+               // Toast.makeText(DetailsActivity.this, "Teste: "+tvDetailsDataSheet.getCountry(), Toast.LENGTH_LONG).show();
             }
         });
     }
+
+    public void getData(){
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            String name = bundle.getString("name");
+            String id = String.valueOf(bundle.getInt("id", -1));
+            binding.toolbarDetails.setTitle(name);
+            fetchDetails(id);
+            Toast.makeText(DetailsActivity.this, "Teste: "+id, Toast.LENGTH_LONG).show();
+
+        }
+    }
+
+
+
 }

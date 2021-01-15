@@ -1,11 +1,11 @@
-package com.automatodev.antenado.responses;
+package com.automatodev.antenado.models;
 
 import com.automatodev.antenado.models.EpisodesEntity;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class TvDetailsDataShet {
+public class TvDetails {
     private long id;
     private String name;
     private String permalink;

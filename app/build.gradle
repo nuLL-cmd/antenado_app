@@ -74,4 +74,7 @@ dependencies {
     //Progressbar
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
+    //CarrosselView
+    implementation 'com.synnapps:carouselview:0.1.5'
+
 }

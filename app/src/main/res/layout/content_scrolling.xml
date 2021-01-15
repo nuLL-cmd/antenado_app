@@ -41,7 +41,7 @@
             android:layout_gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_20sdp"
-            android:visibility="@{isLoading ? View.VISIBLE : View.GONE, default=}"
+            android:visibility="@{isLoading ? View.VISIBLE : View.GONE, default=gone}"
             app:SpinKit_Color="#fff" />
 
         <com.github.ybq.android.spinkit.SpinKitView

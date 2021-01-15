@@ -10,16 +10,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.antenado.R;
 import com.automatodev.antenado.databinding.LayoutItensMainBinding;
+import com.automatodev.antenado.listener.TvDataListener;
 import com.automatodev.antenado.models.TvMostPopular;
 
 import java.util.List;
 
 public class TvMostPopularAdapter extends RecyclerView.Adapter<TvMostPopularAdapter.ViewHolder>{
-    List<TvMostPopular> tvMostPopularList;
-    LayoutInflater layoutInflater;
+   private List<TvMostPopular> tvMostPopularList;
+   private LayoutInflater layoutInflater;
+    private TvDataListener tvDataListener;
 
-    public TvMostPopularAdapter(List<TvMostPopular> tvMostPopularList) {
+
+
+    public TvMostPopularAdapter(List<TvMostPopular> tvMostPopularList, TvDataListener dataListener) {
         this.tvMostPopularList = tvMostPopularList;
+        this.tvDataListener = dataListener;
     }
 
     @NonNull
@@ -35,7 +40,7 @@ public class TvMostPopularAdapter extends RecyclerView.Adapter<TvMostPopularAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.itensBinding.setTvShow(tvMostPopularList.get(position));
+        holder.binding(tvMostPopularList.get(position));
     }
 
     @Override
@@ -45,14 +50,18 @@ public class TvMostPopularAdapter extends RecyclerView.Adapter<TvMostPopularAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         LayoutItensMainBinding itensBinding;
+
         public ViewHolder(@NonNull LayoutItensMainBinding itensBinding) {
             super(itensBinding.getRoot());
             this.itensBinding = itensBinding;
         }
 
-        public void setTvMostPopular(TvMostPopular tvMostPopular){
+        public void binding(TvMostPopular tvMostPopular){
             itensBinding.setTvShow(tvMostPopular);
             itensBinding.executePendingBindings();
+            itensBinding.getRoot().setOnClickListener(view -> {
+                tvDataListener.tvShowClicked(tvMostPopular);
+            });
         }
     }
 }
