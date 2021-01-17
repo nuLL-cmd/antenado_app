@@ -58,20 +58,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <RelativeLayout
-                    android:id="@+id/relativeCardCarousel_details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardCarousel_details"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_200sdp"
-                        android:layout_margin="@dimen/_5sdp"
-                        android:backgroundTint="@color/secondary"
-                        app:cardCornerRadius="@dimen/_6sdp"
-                        app:cardElevation="6dp">
-
                         <com.synnapps.carouselview.CarouselView
                             android:id="@+id/carousel_details"
                             android:layout_width="match_parent"
@@ -81,25 +67,25 @@
                             app:radius="6dp"
                             app:slideInterval="2000"
                             app:strokeColor="#fff"
+                            app:indicatorGravity="bottom|end"
                             app:strokeWidth="0.5dp"
                             tools:ignore="MissingClass" />
-
-                    </androidx.cardview.widget.CardView>
-
-                </RelativeLayout>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:id="@+id/viewFilter_details"
+                    android:background="@drawable/bg_fading_edge"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_alignBottom="@id/carousel_details"/>
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/imgItem_details"
                     android:layout_width="@dimen/_120sdp"
                     android:layout_marginTop="-100dp"
                     android:layout_height="@dimen/_150sdp"
-                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
                     android:url="@{url}"
                     android:scaleType="centerCrop"
-                    android:layout_alignStart="@+id/cardRelativeData_details"
-                    android:layout_below="@id/relativeCardCarousel_details"
+                    android:layout_below="@id/carousel_details"
                     app:riv_corner_radius="@dimen/_4sdp"
-                    android:layout_alignLeft="@+id/cardRelativeData_details"
                     android:layout_marginLeft="@dimen/_10sdp" />
 
                 <RelativeLayout
@@ -107,7 +93,7 @@
                     android:layout_height="wrap_content"
 
                     android:layout_alignBottom="@id/imgItem_details"
-                    android:layout_below="@+id/relativeCardCarousel_details"
+                    android:layout_below="@+id/carousel_details"
                     android:layout_toEndOf="@id/imgItem_details"
                     android:layout_toRightOf="@id/imgItem_details" >
                     <TextView
@@ -134,7 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_100sdp"
                     android:layout_below="@id/imgItem_details"
-                    android:layout_margin="@dimen/_10sdp"
+                  android:layout_margin="@dimen/_10sdp"
                     android:backgroundTint="@color/primary"
                     app:cardCornerRadius="4dp"
                     app:cardElevation="6dp">
