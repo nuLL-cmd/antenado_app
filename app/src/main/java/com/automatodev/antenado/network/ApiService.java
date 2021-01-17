@@ -2,6 +2,7 @@ package com.automatodev.antenado.network;
 
 import com.automatodev.antenado.models.TvDetails;
 import com.automatodev.antenado.responses.TvDataSheet;
+import com.automatodev.antenado.responses.TvDetailsDataSheet;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -13,6 +14,6 @@ public interface ApiService {
     Call<TvDataSheet> getMostPopular(@Query("page") int page);
 
     @GET("show-details")
-    Call<TvDetails> getDetailsTvShow(@Query("q") String q);
+    Call<TvDetailsDataSheet> getDetailsTvShow(@Query("q") String q);
 
 }

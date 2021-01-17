@@ -10,17 +10,26 @@ public class TvDetails {
     private String name;
     private String permalink;
     private String description;
+    private String rating;
 
     @SerializedName("start_date")
     private String startDate;
 
     private String status;
-    private String netWork;
+    private String network;
     private String country;
 
     List<EpisodesEntity> episodes;
     List<String> pictures;
 
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
 
     public String getStatus() {
         return status;
@@ -70,8 +79,8 @@ public class TvDetails {
         this.country = country;
     }
 
-    private void setNetWork(String netWork){
-        this.netWork = netWork;
+    private void setNetwork(String network){
+        this.network = network;
     }
 
     public long getId() {
@@ -94,8 +103,8 @@ public class TvDetails {
         return startDate;
     }
 
-    public String getNetWork() {
-        return netWork;
+    public String getNetwork() {
+        return network;
     }
 
     public String getCountry() {

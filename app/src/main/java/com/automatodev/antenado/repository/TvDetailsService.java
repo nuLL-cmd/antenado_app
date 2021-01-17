@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.automatodev.antenado.network.ApiClient;
 import com.automatodev.antenado.network.ApiService;
 import com.automatodev.antenado.models.TvDetails;
+import com.automatodev.antenado.responses.TvDetailsDataSheet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,11 +27,11 @@ public class TvDetailsService {
         apiService = ApiClient.getRetrofit().create(ApiService.class);
     }
 
-    public LiveData<TvDetails> getDetailsTvShow(String id){
-        MutableLiveData<TvDetails> data = new MutableLiveData<>();
-        apiService.getDetailsTvShow(id).enqueue(new Callback<TvDetails>() {
+    public LiveData<TvDetailsDataSheet> getDetailsTvShow(String id){
+        MutableLiveData<TvDetailsDataSheet> data = new MutableLiveData<>();
+        apiService.getDetailsTvShow(id).enqueue(new Callback<TvDetailsDataSheet>() {
             @Override
-            public void onResponse(Call<TvDetails> call, Response<TvDetails> response) {
+            public void onResponse(Call<TvDetailsDataSheet> call, Response<TvDetailsDataSheet> response) {
                 if (response.isSuccessful()){
                     data.setValue(response.body());
                 }else{
@@ -45,7 +46,7 @@ public class TvDetailsService {
             }
 
             @Override
-            public void onFailure(Call<TvDetails> call, Throwable t) {
+            public void onFailure(Call<TvDetailsDataSheet> call, Throwable t) {
                 Log.e("logx", "ResponseGetDetailsTvShow: "+t.getMessage());
 
             }

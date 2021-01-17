@@ -3,15 +3,9 @@ package com.automatodev.antenado.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.automatodev.antenado.R;
-import com.automatodev.antenado.adapters.TvMostPopularAdapter;
-import com.automatodev.antenado.listener.TvDataListener;
-import com.automatodev.antenado.viewModel.TvMostController;
-import com.automatodev.antenado.databinding.ActivityScrollingBinding;
-import com.automatodev.antenado.models.TvMostPopular;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,9 +13,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import com.automatodev.antenado.R;
+import com.automatodev.antenado.adapters.TvMostPopularAdapter;
+import com.automatodev.antenado.databinding.ActivityScrollingBinding;
+import com.automatodev.antenado.listener.TvDataListener;
+import com.automatodev.antenado.models.TvMostPopular;
+import com.automatodev.antenado.viewModel.TvMostController;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,8 +90,6 @@ public class ScrollingActivity extends AppCompatActivity implements TvDataListen
                 }
             }
         });
-
-
         getAllTvMostPopular();
     }
 
@@ -132,6 +129,7 @@ public class ScrollingActivity extends AppCompatActivity implements TvDataListen
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra("id", tvMostPopular.getId());
         intent.putExtra("name", tvMostPopular.getName());
+        intent.putExtra("picture",tvMostPopular.getUrlImage());
         startActivity(intent);
     }
 }
