@@ -1,23 +1,15 @@
 package com.automatodev.antenado.activities;
 
 import android.os.Bundle;
-
-import com.automatodev.antenado.databinding.ActivityDetailsBinding;
-import com.automatodev.antenado.viewModel.TvDetailsController;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NavUtils;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.telecom.Call;
-import android.view.View;
-import android.widget.Toast;
-
-import com.automatodev.antenado.R;
+import com.automatodev.antenado.databinding.ActivityDetailsBinding;
+import com.automatodev.antenado.viewModel.TvDetailsController;
+import com.google.android.material.snackbar.Snackbar;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -31,6 +23,7 @@ public class DetailsActivity extends AppCompatActivity {
         View v = binding.getRoot();
         setContentView(v);
         setSupportActionBar(binding.toolbarDetails);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         binding.toolbarDetails.setNavigationOnClickListener(v1 -> NavUtils.navigateUpFromSameTask(DetailsActivity.this));
         binding.fabListEpisodesDetails.setOnClickListener(view -> Snackbar.make(view, "Id do item: ", Snackbar.LENGTH_LONG)
@@ -46,7 +39,7 @@ public class DetailsActivity extends AppCompatActivity {
         tvDetailsController.getDetailsTvShow(id).observe(this, tvDetailsDataSheet -> {
             if (tvDetailsDataSheet != null){
                 binding.setIsLoading(false);
-               // Toast.makeText(DetailsActivity.this, "Teste: "+tvDetailsDataSheet.getCountry(), Toast.LENGTH_LONG).show();
+                binding.setTvDetails(tvDetailsDataSheet.getTvShow());
             }
         });
     }
@@ -56,9 +49,11 @@ public class DetailsActivity extends AppCompatActivity {
         if (bundle != null){
             String name = bundle.getString("name");
             String id = String.valueOf(bundle.getInt("id", -1));
+            String picuture = bundle.getString("picture");
+            binding.setUrl(picuture);
             binding.toolbarDetails.setTitle(name);
             fetchDetails(id);
-            Toast.makeText(DetailsActivity.this, "Teste: "+id, Toast.LENGTH_LONG).show();
+
 
         }
     }
