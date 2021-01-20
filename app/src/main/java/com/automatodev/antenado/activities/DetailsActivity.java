@@ -22,10 +22,7 @@ public class DetailsActivity extends AppCompatActivity {
         binding  = ActivityDetailsBinding.inflate(getLayoutInflater());
         View v = binding.getRoot();
         setContentView(v);
-        setSupportActionBar(binding.toolbarDetails);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        binding.toolbarDetails.setNavigationOnClickListener(v1 -> NavUtils.navigateUpFromSameTask(DetailsActivity.this));
         binding.fabListEpisodesDetails.setOnClickListener(view -> Snackbar.make(view, "Id do item: ", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
 
@@ -51,7 +48,6 @@ public class DetailsActivity extends AppCompatActivity {
             String id = String.valueOf(bundle.getInt("id", -1));
             String picuture = bundle.getString("picture");
             binding.setUrl(picuture);
-            binding.toolbarDetails.setTitle(name);
             fetchDetails(id);
 
 
@@ -59,5 +55,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
 
+    public void actDetailsMain(View view){
+        NavUtils.navigateUpFromSameTask(this);
+    }
 
 }

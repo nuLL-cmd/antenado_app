@@ -30,27 +30,11 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBar_details"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
-
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_details"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:title=" "
-                app:titleTextColor="#fff" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/appBar_details"
+
             android:background="@color/onPrimary"
             android:fillViewport="true">
 
@@ -58,69 +42,96 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                        <com.synnapps.carouselview.CarouselView
-                            android:id="@+id/carousel_details"
-                            android:layout_width="match_parent"
-                            android:urls='@{tvDetails.pictures}'
-                            android:layout_height="@dimen/_200sdp"
-                            app:fillColor="#fff"
-                            app:radius="6dp"
-                            app:slideInterval="2000"
-                            app:strokeColor="#fff"
-                            app:indicatorGravity="bottom|end"
-                            app:strokeWidth="0.5dp"
-                            tools:ignore="MissingClass" />
-                <View
+                <com.synnapps.carouselview.CarouselView
+                    android:id="@+id/carousel_details"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:urls='@{tvDetails.pictures}'
+                    app:fillColor="#fff"
+                    app:indicatorGravity="bottom|end"
+                    app:radius="6dp"
+                    app:slideInterval="2000"
+                    app:strokeColor="#fff"
+                    app:strokeWidth="0.5dp"
+                    tools:ignore="MissingClass" />
+
+                <ImageButton
+                    android:id="@+id/btnBack_details"
+                    android:layout_width="@dimen/_40sdp"
+                    android:src="@drawable/ic_back"
+                    android:onClick="actDetailsMain"
+                    android:background="@drawable/bg_btn_back"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_height="@dimen/_40sdp"/>
+
+                <View
                     android:id="@+id/viewFilter_details"
-                    android:background="@drawable/bg_fading_edge"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
-                    android:layout_alignBottom="@id/carousel_details"/>
+                    android:layout_alignBottom="@id/carousel_details"
+                    android:background="@drawable/bg_fading_edge" />
+
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/imgItem_details"
                     android:layout_width="@dimen/_120sdp"
-                    android:layout_marginTop="-100dp"
                     android:layout_height="@dimen/_150sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:url="@{url}"
-                    android:scaleType="centerCrop"
                     android:layout_below="@id/carousel_details"
-                    app:riv_corner_radius="@dimen/_4sdp"
-                    android:layout_marginLeft="@dimen/_10sdp" />
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="-100dp"
+                    android:scaleType="centerCrop"
+                    android:url="@{url}"
+                    app:riv_corner_radius="@dimen/_4sdp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:layout_alignBottom="@id/imgItem_details"
                     android:layout_below="@+id/carousel_details"
+                    android:layout_alignBottom="@id/imgItem_details"
                     android:layout_toEndOf="@id/imgItem_details"
-                    android:layout_toRightOf="@id/imgItem_details" >
+                    android:layout_toRightOf="@id/imgItem_details">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:drawablePadding="@dimen/_5sdp"
-                        android:textSize="@dimen/_25sdp"
-                        android:textStyle="bold"
-                        android:text='@{tvDetails.rating}'
-                        android:textColor="@color/colorTextPrimary"
-                        android:textAlignment="center"
-                        app:drawableStartCompat="@drawable/ic_star"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_10sdp"
-                        android:gravity="center_horizontal" />
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:gravity="center_horizontal"
+                        android:text='@{tvDetails.rating}'
+                        android:textAlignment="center"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="@dimen/_25sdp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_star" />
 
                 </RelativeLayout>
 
 
+                <TextView
+                    android:id="@+id/txtNameItem_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgItem_details"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text='@{tvDetails.name}'
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="@dimen/_15ssp"
+                    app:drawableStartCompat="@drawable/ic_tv" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardRelativeData_details"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_100sdp"
-                    android:layout_below="@id/imgItem_details"
-                  android:layout_margin="@dimen/_10sdp"
+                    android:layout_below="@id/txtNameItem_details"
+                    android:layout_margin="@dimen/_10sdp"
                     android:backgroundTint="@color/primary"
                     app:cardCornerRadius="4dp"
                     app:cardElevation="6dp">

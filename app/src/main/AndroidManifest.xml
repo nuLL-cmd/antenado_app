@@ -15,7 +15,7 @@
             android:name=".activities.DetailsActivity"
             android:label="@string/title_activity_details"
             android:parentActivityName=".activities.DetailsActivity"
-            android:theme="@style/Theme.Antenado.NoActionBar">
+            android:theme="@style/Theme.Antenadotwo">
 
         </activity>
         <activity
