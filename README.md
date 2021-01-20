@@ -36,6 +36,7 @@ Technologies used:
 * Lifecycle 
 * RxJava
 * RoomDatabase(Data persistence)
+* API https://www.episodate.com/api
 
 Development environment
 * Android Studio
