@@ -11,6 +11,13 @@ public class EpisodesEntity {
     @SerializedName("air_date")
     private String airDate;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public void setSeason(int season){
         this.season = season;

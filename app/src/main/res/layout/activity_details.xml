@@ -25,16 +25,19 @@
     </data>
 
     <RelativeLayout
-        android:id="@+id/relativr_details"
+        android:id="@+id/relative_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
+
+
+
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:background="@color/onPrimary"
             android:fillViewport="true">
 
@@ -274,47 +277,64 @@
                     android:layout_below="@id/cardRelativeData_details"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="-40dp"
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:backgroundTint="@color/onPrimary"
                     app:backgroundTint="@color/primary"
                     app:borderWidth="7dp"
                     app:layout_anchorGravity="bottom|end"
-                    app:srcCompat="@drawable/ic_baseline_menu_open_24"
+                    app:srcCompat="@drawable/ic_star"
                     app:tint="#fff"
                     tools:ignore="VectorDrawableCompat" />
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/cardRelativeData_details"
-                    android:layout_alignLeft="@id/cardRelativeData_details"
-                    android:layout_alignTop="@id/fabListEpisodes_details"
-                    android:layout_alignBottom="@id/fabListEpisodes_details"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_5sdp"
-                    android:layout_toStartOf="@id/fabListEpisodes_details"
-                    android:layout_toLeftOf="@id/fabListEpisodes_details"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="Ver lista de episódios"
-                    android:textColor="@color/colorTextPrimary"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold" />
 
 
                 <TextView
                     android:id="@+id/txtDescription_details"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_below="@id/fabListEpisodes_details"
                     android:layout_margin="@dimen/_10sdp"
                     android:text='@{tvDetails.description}'
                     android:textColor="@color/colorTextPrimary" />
+
+                <LinearLayout
+                    android:id="@+id/linearButtons_details"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:layout_below="@id/txtDescription_details"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp">
+
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_40sdp"
+                        android:textStyle="bold"
+                        android:backgroundTint="#FFC107"
+                        android:onClick="showListEpisodes"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        style="@style/BottomSheetDialogTheme"
+                        android:text= "Lista de episodios"
+                       />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_height="@dimen/_40sdp"
+                        android:textColor="#fff"
+                        android:backgroundTint="#2196F3"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        style="@style/BottomSheetDialogTheme"
+                        android:text= "Ver no site"
+                        />
+
+
+                </LinearLayout>
 
 
             </RelativeLayout>

@@ -77,6 +77,7 @@ public class ScrollingActivity extends AppCompatActivity implements TvDataListen
         binding.includeContentScolling.recyclerItemMain.hasFixedSize();
         tvControler = new ViewModelProvider(this).get(TvMostController.class);
         adapter = new TvMostPopularAdapter(tvMostPopulars, this);
+
         binding.includeContentScolling.recyclerItemMain.setAdapter(adapter);
         binding.includeContentScolling.recyclerItemMain.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
