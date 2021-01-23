@@ -11,6 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Antenado">
+        <activity android:name=".activities.FavouritesActivity"
+            android:parentActivityName=".activities.FavouritesActivity"
+            android:theme="@style/Theme.Antenado.NoActionBar">
+
+        </activity>
         <activity
             android:name=".activities.DetailsActivity"
             android:label="@string/title_activity_details"

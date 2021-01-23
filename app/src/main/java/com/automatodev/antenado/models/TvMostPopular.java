@@ -1,13 +1,16 @@
 package com.automatodev.antenado.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.io.Serializable;
 
-@Getter @Setter
-public class TvMostPopular {
-    
+@Entity(tableName = "tvShows")
+public class TvMostPopular implements Serializable {
+
+    @PrimaryKey
     private int id;
     private String name;
     private String permalink;

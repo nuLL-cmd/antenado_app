@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/linearDaddy_favourites"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/secondary"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/appbar_favourites">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:layout_height="match_parent"
+                app:titleTextColor="@color/colorTextPrimary"
+                android:id="@+id/toolbar_favourites" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:id="@+id/recycler_favourites"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_5sdp"
+            tools:listitem="@layout/layout_itens_main"
+            android:layout_marginTop="@dimen/_10sdp" />
+
+    </LinearLayout>
+</layout>

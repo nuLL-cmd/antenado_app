@@ -50,7 +50,7 @@ public class ScrollingActivity extends AppCompatActivity implements TvDataListen
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(ScrollingActivity.this, FavouritesActivity.class));
             }
         });
 
@@ -103,7 +103,6 @@ public class ScrollingActivity extends AppCompatActivity implements TvDataListen
                 if (tvDataSheet.getTvMostPopulars() != null) {
                     tvMostPopulars.addAll(tvDataSheet.getTvMostPopulars());
                     int oldCount = tvMostPopulars.size();
-                    tvMostPopulars.addAll(tvDataSheet.getTvMostPopulars());
                     adapter.notifyItemRangeChanged(oldCount, tvMostPopulars.size());
                 }
             }
@@ -128,9 +127,8 @@ public class ScrollingActivity extends AppCompatActivity implements TvDataListen
     @Override
     public void tvShowClicked(TvMostPopular tvMostPopular) {
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra("id", tvMostPopular.getId());
-        intent.putExtra("name", tvMostPopular.getName());
-        intent.putExtra("picture",tvMostPopular.getUrlImage());
+        intent.putExtra("tvShow",tvMostPopular);
         startActivity(intent);
     }
+
 }

@@ -1,11 +1,13 @@
 package com.automatodev.antenado.models;
 
-import com.automatodev.antenado.models.EpisodesEntity;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+
+
 public class TvDetails {
+
     private long id;
     private String name;
     private String permalink;
@@ -18,10 +20,19 @@ public class TvDetails {
     private String status;
     private String network;
     private String country;
+    private String url;
 
     List<EpisodesEntity> episodes;
     List<String> pictures;
 
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getRating() {
         return rating;
