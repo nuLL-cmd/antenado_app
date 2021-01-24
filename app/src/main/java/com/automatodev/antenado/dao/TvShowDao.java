@@ -24,5 +24,8 @@ public interface TvShowDao {
     Completable addFavourites(TvMostPopular tvMostPopular);
 
     @Delete
-    void removeFovourite(TvMostPopular tvMostPopular);
+    Completable removeFovourite(TvMostPopular tvMostPopular);
+
+    @Query("SELECT * FROM tvShows WHERE id = :id")
+    Flowable<TvMostPopular> getFavouriteSingle(int id);
 }

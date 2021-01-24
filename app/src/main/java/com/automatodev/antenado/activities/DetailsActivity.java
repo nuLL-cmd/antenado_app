@@ -18,6 +18,7 @@ import com.automatodev.antenado.databinding.ActivityDetailsBinding;
 import com.automatodev.antenado.databinding.LayoutBottomEpisodesBinding;
 import com.automatodev.antenado.models.EpisodesEntity;
 import com.automatodev.antenado.models.TvMostPopular;
+import com.automatodev.antenado.utilities.RefreshRules;
 import com.automatodev.antenado.viewModel.TvDetailsController;
 import com.automatodev.antenado.viewModel.TvShowFavouritesController;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -37,6 +38,7 @@ public class DetailsActivity extends AppCompatActivity {
     private List<EpisodesEntity> episodesEntities = new ArrayList<>();
     private String url;
     private TvMostPopular tvMostPopular = new TvMostPopular();
+    private Boolean isFavourite = false;
     View viewDetails;
 
     private ActivityDetailsBinding binding;
@@ -47,6 +49,8 @@ public class DetailsActivity extends AppCompatActivity {
         binding = ActivityDetailsBinding.inflate(getLayoutInflater());
         viewDetails = binding.getRoot();
         setContentView(viewDetails);
+        tvDetailsController = new ViewModelProvider(this).get(TvDetailsController.class);
+        tvFavouriteController = new ViewModelProvider(this).get(TvShowFavouritesController.class);
 
         getData();
 
@@ -54,8 +58,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void fetchDetails(String id) {
         binding.setIsLoading(true);
-        tvDetailsController = new ViewModelProvider(this).get(TvDetailsController.class);
-        tvFavouriteController = new ViewModelProvider(this).get(TvShowFavouritesController.class);
+
         tvDetailsController.getDetailsTvShow(id).observe(this, tvDetailsDataSheet -> {
             if (tvDetailsDataSheet != null) {
                 episodesEntities.addAll(tvDetailsDataSheet.getTvShow().getEpisodes());
@@ -64,13 +67,20 @@ public class DetailsActivity extends AppCompatActivity {
                 binding.setTvDetails(tvDetailsDataSheet.getTvShow());
 
                 binding.fabListEpisodesDetails.setOnClickListener(v ->{
-                    if (tvMostPopular != null){
+                    if (isFavourite){
+                            new CompositeDisposable().add(tvFavouriteController.deleteFavourite(tvMostPopular).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(() ->{
+                                binding.fabListEpisodesDetails.setImageResource(R.drawable.ic_star);
+                                Snackbar.make(v, "Favorito removido!", Snackbar.LENGTH_LONG).show();
+                                RefreshRules.IS_FAVOURITES_UPDATE_LIST = true;
+                                isFavourite = false;
+                            }));
+                    }else{
                         new CompositeDisposable().add(tvFavouriteController.addFavourites(tvMostPopular).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(() ->{
                             binding.fabListEpisodesDetails.setImageResource(R.drawable.ic_check);
                             Snackbar.make(v, "Favorito adicionado com sucesso!", Snackbar.LENGTH_LONG).show();
+                            isFavourite = true;
                         }));
                     }
-
                 });
             }
         });
@@ -81,6 +91,7 @@ public class DetailsActivity extends AppCompatActivity {
         if (bundle != null) {
             tvMostPopular = (TvMostPopular) bundle.getSerializable("tvShow");
             binding.setUrl(tvMostPopular.getUrlImage());
+            checkFavourite(tvMostPopular.getId());
             fetchDetails(String.valueOf(tvMostPopular.getId()));
 
 
@@ -115,5 +126,15 @@ public class DetailsActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
+    }
+
+    public void checkFavourite(int id){
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        compositeDisposable.add(tvFavouriteController.getFavouriteSingle(id).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe(tvMostPopular1 -> {
+                if (tvMostPopular1 != null){
+                    isFavourite = true;
+                    binding.fabListEpisodesDetails.setImageResource(R.drawable.ic_check);
+                }
+        }));
     }
 }

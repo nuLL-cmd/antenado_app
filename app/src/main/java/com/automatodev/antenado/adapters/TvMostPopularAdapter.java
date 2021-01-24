@@ -18,7 +18,7 @@ public class TvMostPopularAdapter extends RecyclerView.Adapter<TvMostPopularAdap
     private List<TvMostPopular> tvMostPopularList;
     private LayoutInflater layoutInflater;
     private TvDataListener tvDataListener;
-    private String typeList;
+    private final String typeList;
 
 
     public TvMostPopularAdapter(String typeList, List<TvMostPopular> tvMostPopularList, TvDataListener dataListener) {
@@ -57,13 +57,13 @@ public class TvMostPopularAdapter extends RecyclerView.Adapter<TvMostPopularAdap
         }
 
         public void binding(TvMostPopular tvMostPopular) {
+            itensBinding.setTypeList(typeList);
             itensBinding.setTvShow(tvMostPopular);
             itensBinding.executePendingBindings();
-            itensBinding.setTypeList(typeList);
             itensBinding.getRoot().setOnClickListener(view -> {
                 tvDataListener.tvShowClicked(tvMostPopular);
-                tvDataListener.tvShowDelete(tvMostPopular,getAdapterPosition());
             });
+            itensBinding.btnTrashLayout.setOnClickListener(view -> tvDataListener.tvShowDelete(tvMostPopular, getAdapterPosition()));
         }
     }
 }

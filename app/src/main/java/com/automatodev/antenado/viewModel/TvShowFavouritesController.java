@@ -28,4 +28,12 @@ public class TvShowFavouritesController extends AndroidViewModel {
     public Flowable<List<TvMostPopular>> getFavourites(){
         return tvShowDatabase.tvShowDao().getFavourites();
     }
+
+    public Completable deleteFavourite(TvMostPopular tvMostPopular){
+        return tvShowDatabase.tvShowDao().removeFovourite(tvMostPopular);
+    }
+
+    public Flowable<TvMostPopular> getFavouriteSingle(int id){
+        return tvShowDatabase.tvShowDao().getFavouriteSingle(id);
+    }
 }
