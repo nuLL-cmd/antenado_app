@@ -2,6 +2,7 @@ package com.automatodev.antenado.activities;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -37,16 +38,13 @@ public class FavouritesActivity extends AppCompatActivity implements TvDataListe
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Favoritos");
 
-
         showData();
-
-
     }
 
     public void showData() {
         binding.recyclerFavourites.hasFixedSize();
         tvFavouriteController = new ViewModelProvider(this).get(TvShowFavouritesController.class);
-        tvMostPopularAdapter = new TvMostPopularAdapter(tvMostPopularList, this);
+        tvMostPopularAdapter = new TvMostPopularAdapter("favLIst", tvMostPopularList, this);
         binding.recyclerFavourites.setAdapter(tvMostPopularAdapter);
         fetchFavourites();
     }
@@ -56,15 +54,20 @@ public class FavouritesActivity extends AppCompatActivity implements TvDataListe
         compositeDisposable.add(tvFavouriteController.getFavourites()
                 .subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(tvShows -> {
-                   if(tvShows != null){
-                           tvMostPopularList.addAll(tvShows);
-                           tvMostPopularAdapter.notifyDataSetChanged();;
-                   }
+                    if (tvShows != null) {
+                        tvMostPopularList.addAll(tvShows);
+                        tvMostPopularAdapter.notifyDataSetChanged();
+                        ;
+                    }
                 }));
     }
 
     @Override
-    public void tvShowClicked(TvMostPopular tvMostPopular) {
+    public void tvShowClicked(TvMostPopular tvMostPopular) { }
 
+    @Override
+    public void tvShowDelete(TvMostPopular tvMOstPopular, int position) {
+        Toast.makeText(this, "Teste position: " + position, Toast.LENGTH_SHORT).show();
     }
+
 }

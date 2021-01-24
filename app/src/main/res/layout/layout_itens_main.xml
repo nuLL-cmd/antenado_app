@@ -4,6 +4,7 @@
 
     <data>
         <import type="android.graphics.Color"/>
+        <import type="android.view.View"/>
         <variable
             name="tvShow"
             type="com.automatodev.antenado.models.TvMostPopular" />
@@ -12,6 +13,10 @@
 
             name="color"
             type="android.graphics.Color" />
+
+        <variable
+            name="typeList"
+            type="String" />
 
 
 
@@ -82,15 +87,17 @@
                 <TextView
                     android:id="@+id/txtNetWork_layout"
                     android:text='@{tvShow.country+" ("+tvShow.network+")"}'
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/imgItem_layout"
                     android:layout_toRightOf="@id/imgItem_layout"
-                    android:layout_below="@id/txtName_layout"
+                    android:layout_below="@id/txtStarted_layout"
                     android:textColor="@color/colorTextOther"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toStartOf="@id/btnTrash_layout"
+                    android:layout_toLeftOf="@id/btnTrash_layout"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:textSize="@dimen/_12sdp"
@@ -104,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/imgItem_layout"
                     android:layout_toRightOf="@id/imgItem_layout"
-                    android:layout_below="@id/txtNetWork_layout"
+                    android:layout_below="@id/txtName_layout"
                     android:textColor="@color/colorTextSecondary"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
@@ -120,18 +127,36 @@
                     android:text='@{tvShow.status.equals("Ended") ? "Encerrado" : "Exibindo"}'
                     android:textColor='@{tvShow.status.equals("Ended") ? Color.parseColor("#ff5252") : Color.parseColor("#4CAF50")}'
                     android:layout_marginTop="@dimen/_3sdp"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/imgItem_layout"
                     android:layout_toRightOf="@id/imgItem_layout"
-                    android:layout_below="@id/txtStarted_layout"
+                    android:layout_toStartOf="@id/btnTrash_layout"
+                    android:layout_toLeftOf="@id/btnTrash_layout"
+                    android:layout_below="@id/txtNetWork_layout"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:includeFontPadding="false"
                     android:textSize="@dimen/_12sdp"
-                    android:paddingTop="@dimen/_2sdp" />
+                    android:paddingTop="@dimen/_2sdp"
+                    />
+
+
+
+                <ImageButton
+                    android:id="@+id/btnTrash_layout"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:visibility='@{typeList.equals("favList")? View.VISIBLE : View.GONE, default=gone}'
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_alignTop="@id/txtNetWork_layout"
+                    android:src="@drawable/ic_trash"
+                    android:layout_alignBottom="@id/txtStatus_layout"
+                    android:background="@drawable/bg_btn_back"
+                    android:layout_alignParentRight="true" />
 
             </RelativeLayout>
         </LinearLayout>

@@ -1,7 +1,6 @@
 package com.automatodev.antenado.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -15,25 +14,26 @@ import com.automatodev.antenado.models.TvMostPopular;
 
 import java.util.List;
 
-public class TvMostPopularAdapter extends RecyclerView.Adapter<TvMostPopularAdapter.ViewHolder>{
-   private List<TvMostPopular> tvMostPopularList;
-   private LayoutInflater layoutInflater;
+public class TvMostPopularAdapter extends RecyclerView.Adapter<TvMostPopularAdapter.ViewHolder> {
+    private List<TvMostPopular> tvMostPopularList;
+    private LayoutInflater layoutInflater;
     private TvDataListener tvDataListener;
+    private String typeList;
 
 
-
-    public TvMostPopularAdapter(List<TvMostPopular> tvMostPopularList, TvDataListener dataListener) {
+    public TvMostPopularAdapter(String typeList, List<TvMostPopular> tvMostPopularList, TvDataListener dataListener) {
         this.tvMostPopularList = tvMostPopularList;
         this.tvDataListener = dataListener;
+        this.typeList = typeList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (layoutInflater == null){
+        if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
-        LayoutItensMainBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.layout_itens_main,parent, false);
+        LayoutItensMainBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.layout_itens_main, parent, false);
         return new ViewHolder(binding);
 
     }
@@ -56,11 +56,13 @@ public class TvMostPopularAdapter extends RecyclerView.Adapter<TvMostPopularAdap
             this.itensBinding = itensBinding;
         }
 
-        public void binding(TvMostPopular tvMostPopular){
+        public void binding(TvMostPopular tvMostPopular) {
             itensBinding.setTvShow(tvMostPopular);
             itensBinding.executePendingBindings();
+            itensBinding.setTypeList(typeList);
             itensBinding.getRoot().setOnClickListener(view -> {
                 tvDataListener.tvShowClicked(tvMostPopular);
+                tvDataListener.tvShowDelete(tvMostPopular,getAdapterPosition());
             });
         }
     }

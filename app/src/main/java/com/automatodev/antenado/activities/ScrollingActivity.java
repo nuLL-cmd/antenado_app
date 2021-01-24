@@ -76,7 +76,7 @@ public class ScrollingActivity extends AppCompatActivity implements TvDataListen
     public void showData() {
         binding.includeContentScolling.recyclerItemMain.hasFixedSize();
         tvControler = new ViewModelProvider(this).get(TvMostController.class);
-        adapter = new TvMostPopularAdapter(tvMostPopulars, this);
+        adapter = new TvMostPopularAdapter("mainLIst",tvMostPopulars, this);
 
         binding.includeContentScolling.recyclerItemMain.setAdapter(adapter);
         binding.includeContentScolling.recyclerItemMain.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -129,6 +129,11 @@ public class ScrollingActivity extends AppCompatActivity implements TvDataListen
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra("tvShow",tvMostPopular);
         startActivity(intent);
+    }
+
+    @Override
+    public void tvShowDelete(TvMostPopular tvMOstPopular, int position) {
+
     }
 
 }
