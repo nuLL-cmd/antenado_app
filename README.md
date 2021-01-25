@@ -11,7 +11,8 @@ Functions
 <br/>
 <br/>
 
-![device-2021-01-20-200949](https://user-images.githubusercontent.com/58223932/105252147-adbe1800-5b5b-11eb-92f8-96865ce6fd58.png)
+<img src="https://camo.githubusercontent.com/..." data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200" height="400" />
+
 
 <br/>
 <br/>
