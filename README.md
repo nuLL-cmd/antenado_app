@@ -17,14 +17,27 @@ Functions
 <br/>
 <br/>
 
-* Details, search and favourites
+* Details and informations.
 * Access the website episodate.com from more informations on the selected item
 
 <br/>
 <br/>
 
-![device-2021-01-20-201047](https://user-images.githubusercontent.com/58223932/105252149-aeef4500-5b5b-11eb-8139-1c14cc577e69.png)
+<img src="https://user-images.githubusercontent.com/58223932/105764109-4aeec700-5f35-11eb-9105-820fe555894b.png" width="300" height="600" />   <img src="https://user-images.githubusercontent.com/58223932/105764132-53470200-5f35-11eb-88d6-18386c2e61bb.png" width="300" height="600" />
 
+
+<br/>
+<br/>
+
+* Search and favourites
+
+<br/>
+<br/>
+
+<img src="https://user-images.githubusercontent.com/58223932/105764203-6c4fb300-5f35-11eb-975d-fedc4aa2a35b.png" width="300" height="600" />   <img src="https://user-images.githubusercontent.com/58223932/105764123-50e4a800-5f35-11eb-82fe-6e4e465cd70e.png" width="300" height="600" />
+
+<br/>
+<br/>
 
 Technologies used:
 * Design  XML
