@@ -52,12 +52,12 @@ public class FavouritesActivity extends AppCompatActivity implements TvDataListe
     }
 
     private void fetchFavourites() {
-        tvMostPopularList.clear();
         CompositeDisposable compositeDisposable = new CompositeDisposable();
         compositeDisposable.add(tvFavouriteController.getFavourites()
                 .subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(tvShows -> {
                     if (tvShows != null) {
+                        tvMostPopularList.clear();
                         tvMostPopularList.addAll(tvShows);
                         tvMostPopularAdapter.notifyDataSetChanged();
                         compositeDisposable.dispose();

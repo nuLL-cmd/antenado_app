@@ -280,12 +280,12 @@
                     android:layout_marginTop="-40dp"
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:layout_marginRight="@dimen/_15sdp"
-                    android:backgroundTint="@color/onPrimary"
-                    app:backgroundTint="@color/primary"
+                    android:backgroundTint="#fff"
+                    app:backgroundTint="#F44336"
                     app:borderWidth="7dp"
                     app:layout_anchorGravity="bottom|end"
-                    app:srcCompat="@drawable/ic_star"
-                    app:tint="#fff"
+                    app:srcCompat="@drawable/ic_heart"
+                    app:tint="#F44336"
                     tools:ignore="VectorDrawableCompat" />
 
 

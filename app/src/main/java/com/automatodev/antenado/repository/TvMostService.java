@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,6 +51,23 @@ public class TvMostService {
             public void onFailure(Call<TvDataSheet> call, Throwable t) {
                 t.printStackTrace();
                 Log.e("logx","Error getAllTvMostPopular: "+t.getMessage());
+            }
+        });
+        return data;
+    }
+
+    public LiveData<TvDataSheet> searchTvShow(String query, int page){
+        MutableLiveData<TvDataSheet> data = new MutableLiveData<>();
+        apiService.searchTvShow(query, page).enqueue(new Callback<TvDataSheet>() {
+            @Override
+            public void onResponse(Call<TvDataSheet> call, Response<TvDataSheet> response) {
+                if (response.isSuccessful())
+                    data.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<TvDataSheet> call, Throwable t) {
+
             }
         });
         return data;

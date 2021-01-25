@@ -69,7 +69,7 @@ public class DetailsActivity extends AppCompatActivity {
                 binding.fabListEpisodesDetails.setOnClickListener(v ->{
                     if (isFavourite){
                             new CompositeDisposable().add(tvFavouriteController.deleteFavourite(tvMostPopular).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(() ->{
-                                binding.fabListEpisodesDetails.setImageResource(R.drawable.ic_star);
+                                binding.fabListEpisodesDetails.setImageResource(R.drawable.ic_heart);
                                 Snackbar.make(v, "Favorito removido!", Snackbar.LENGTH_LONG).show();
                                 RefreshRules.IS_FAVOURITES_UPDATE_LIST = true;
                                 isFavourite = false;
@@ -78,6 +78,7 @@ public class DetailsActivity extends AppCompatActivity {
                         new CompositeDisposable().add(tvFavouriteController.addFavourites(tvMostPopular).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(() ->{
                             binding.fabListEpisodesDetails.setImageResource(R.drawable.ic_check);
                             Snackbar.make(v, "Favorito adicionado com sucesso!", Snackbar.LENGTH_LONG).show();
+                            RefreshRules.IS_FAVOURITES_UPDATE_LIST = true;
                             isFavourite = true;
                         }));
                     }
@@ -134,6 +135,7 @@ public class DetailsActivity extends AppCompatActivity {
                 if (tvMostPopular1 != null){
                     isFavourite = true;
                     binding.fabListEpisodesDetails.setImageResource(R.drawable.ic_check);
+                    compositeDisposable.dispose();
                 }
         }));
     }

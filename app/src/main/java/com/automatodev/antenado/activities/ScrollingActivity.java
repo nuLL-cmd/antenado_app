@@ -66,8 +66,8 @@ public class ScrollingActivity extends AppCompatActivity implements TvDataListen
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.search_bar) {
+           startActivity(new Intent(this, SearchActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

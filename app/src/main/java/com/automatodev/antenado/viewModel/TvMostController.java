@@ -21,4 +21,7 @@ public class TvMostController extends ViewModel {
         return tmpService.getAllTvMostPopular(page);
     }
 
+    public LiveData<TvDataSheet> searchTvShow(String query, int page){
+        return tmpService.searchTvShow(query, page);
+    }
 }
